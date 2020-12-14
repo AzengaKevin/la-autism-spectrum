@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get('/dashboard', fn() => view('dashboard'))
+    ->name('dashboard');
+
+# Profile Setting Route
+Route::get('/user/settings', User\SettingsController::class)
+    ->name('settings.show')
+    ->middleware(['auth']);
