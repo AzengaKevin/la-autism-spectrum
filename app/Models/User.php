@@ -58,4 +58,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Questionnaire relationship
+     */
+    public function questionnaires()
+    {
+        return $this->hasMany(Questionnaire::class);
+    }
 }

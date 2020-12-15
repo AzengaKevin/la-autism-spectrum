@@ -25,6 +25,7 @@ class QuestionnaireFactory extends Factory
         return [
             'user_id' => User::factory(),
             'title' => $this->faker->sentence,
+            'slug' => $this->faker->word,
             'description' => $this->faker->paragraph,
             'min_age' => $this->faker->numberBetween(1, 100)
         ];

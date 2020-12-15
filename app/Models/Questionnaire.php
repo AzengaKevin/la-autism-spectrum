@@ -11,5 +11,5 @@ class Questionnaire extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['user_id', 'title', 'description', 'min_age'];
+    protected $fillable = ['user_id', 'title', 'slug', 'description', 'min_age'];
 }

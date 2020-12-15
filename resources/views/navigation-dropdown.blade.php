@@ -28,6 +28,12 @@
                         {{ __('Settings') }}
                     </x-jet-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('questionnaires') }}" :active="request()->routeIs('questionnaires')">
+                        {{ __('Questionnaires') }}
+                    </x-jet-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -134,6 +140,9 @@
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('settings.show') }}" :active="request()->routeIs('settings.show')">
                 {{ __('Settings') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('questionnaires') }}" :active="request()->routeIs('questionnaires')">
+                {{ __('Questionnaires') }}
             </x-jet-responsive-nav-link>
         </div>
 

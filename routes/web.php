@@ -13,15 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', fn() => view('welcome'));
+
+Route::group([
+    'middleware' => ['auth:sanctum', 'auth', 'verified'],
+], function(){
+    Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
+    Route::get('/user/settings', fn() => view('settings.show'))->name('settings.show');
+    Route::get('/user/questionnaires', fn() => view('questionnaires'))->name('questionnaires');
 });
-
-Route::middleware(['auth:sanctum', 'verified'])
-    ->get('/dashboard', fn() => view('dashboard'))
-    ->name('dashboard');
-
-# Profile Setting Route
-Route::get('/user/settings', User\SettingsController::class)
-    ->name('settings.show')
-    ->middleware(['auth']);

@@ -12,7 +12,7 @@ class QuestionnaireCrudTest extends TestCase
     use RefreshDatabase;
 
     /** @group questionnaire */
-    public function test_questionnaire_can_be_created()
+    public function test_a_questionnaire_can_be_created()
     {
         $questionnaireData = Questionnaire::factory()->make()->toArray();
 
