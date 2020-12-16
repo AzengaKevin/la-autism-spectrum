@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use App\Models\Questionnaire;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class Questionnaires extends Component
@@ -78,6 +79,22 @@ class Questionnaires extends Component
     public function readQuestionnaires()
     {
         return Auth::user()->questionnaires;
+    }
+
+    /**
+     * Persists the questionnaire changes to the database
+     */
+    public function updateQuestionnaire()
+    {
+        if(!is_null($this->questionnaireId)){
+            
+            $data = $this->validate();
+    
+            Questionnaire::findOrFail($this->questionnaireId)
+                ->update($data);
+
+            $this->toggleShowUpsertModal();
+        }
     }
 
     /**
