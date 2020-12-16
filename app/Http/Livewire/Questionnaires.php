@@ -4,11 +4,13 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\WithPagination;
 use App\Models\Questionnaire;
 use Illuminate\Support\Facades\Auth;
 
 class Questionnaires extends Component
 {
+    use WithPagination;
     /**
      * Show / Hide modal flag
      */
@@ -21,6 +23,9 @@ class Questionnaires extends Component
     public $slug;
     public $min_age;
     public $description;
+
+    public $questionnaireId;
+    public $questionnaireTitle;
 
     /**
      * Validation rules
@@ -50,14 +55,14 @@ class Questionnaires extends Component
      */
     public function render()
     {
-        return view('livewire.questionnaires');
+        return view('livewire.questionnaires', ['questionnaires' => $this->readQuestionnaires()]);
     }
 
 
     /**
      * Persist a new questionnaire to the database
      */
-    public function addQuestionnaire()
+    public function createQuestionnaire()
     {
         $data = $this->validate();
         
@@ -65,6 +70,14 @@ class Questionnaires extends Component
             Auth::user()->questionnaires()->create($data);
 
         $this->toggleShowUpsertModal();
+    }
+
+    /**
+     * Return questionnaires that belong to the then authenticated user
+     */
+    public function readQuestionnaires()
+    {
+        return Auth::user()->questionnaires;
     }
 
     /**
@@ -82,6 +95,7 @@ class Questionnaires extends Component
     {
         if(!$flag){
             $this->resetValidation();
+            // $this->reset(['title', 'slug', 'min_age', 'description', 'questionnaire']);
             $this->reset();
         }
     }
@@ -89,6 +103,27 @@ class Questionnaires extends Component
     private function toggleShowUpsertModal()
     {
         $this->showUpsertModal = !$this->showUpsertModal;
+    }
+
+    public function getQuestionnaireProperty()
+    {
+        return Questionnaire::findOrFail($this->questionnaireId);
+    }
+
+
+    /**
+     * Update the modeled properties and show the update modal
+     */
+    public function showEditQuestionnaireModal(Questionnaire $questionnaire)
+    {
+
+        $this->questionnaireId = $questionnaire->id;
+        $this->questionnaireTitle =  $this->title = $questionnaire->title;
+        $this->slug = $questionnaire->slug;
+        $this->min_age = $questionnaire->min_age;
+        $this->description = $questionnaire->description;
+
+        $this->toggleShowUpsertModal();
     }
 
 }
