@@ -12,10 +12,17 @@ use Illuminate\Support\Facades\Auth;
 class Questionnaires extends Component
 {
     use WithPagination;
+
     /**
-     * Show / Hide modal flag
+     * Show / Hide updating and inserting modal flag
      */
     public $showUpsertModal = false;
+
+    /**
+     * Show / Hide deleting modal flag
+     */
+    public $showDeleteModal = false;
+
 
     /**
      * A modeled properties for the model
@@ -46,6 +53,9 @@ class Questionnaires extends Component
         'description' => 'description',
     ];
 
+    /**
+     * Livewire mount function called when the component is mounting
+     */
     public function mount()
     {
         
@@ -112,24 +122,39 @@ class Questionnaires extends Component
     {
         if(!$flag){
             $this->resetValidation();
-            // $this->reset(['title', 'slug', 'min_age', 'description', 'questionnaire']);
             $this->reset();
         }
     }
 
+    /**
+     * Update properties when an item is deleted
+     */
+    public function updatedShowDeleteModal($flag)
+    {
+        if(!$flag){
+            $this->reset();
+        }
+    }
+
+    /**
+     * Inverts the current boolean value of showUpsertModal property
+     */
     private function toggleShowUpsertModal()
     {
         $this->showUpsertModal = !$this->showUpsertModal;
     }
 
-    public function getQuestionnaireProperty()
+    /**
+     * Inverts the current value of showDeleteModal property
+     */
+    public function toggleShowDeleteModal()
     {
-        return Questionnaire::findOrFail($this->questionnaireId);
+        $this->showDeleteModal = !$this->showDeleteModal;
     }
 
 
     /**
-     * Update the modeled properties and show the update modal
+     * Update the required properties and show the update modal
      */
     public function showEditQuestionnaireModal(Questionnaire $questionnaire)
     {
@@ -141,6 +166,30 @@ class Questionnaires extends Component
         $this->description = $questionnaire->description;
 
         $this->toggleShowUpsertModal();
+    }
+
+    /**
+     * Update the required properties and shoe the deleting modal
+     */
+    public function showConfirmQuestionnaireDeletionModal(Questionnaire $questionnaire)
+    {
+        $this->questionnaireId = $questionnaire->id;
+        $this->questionnaireTitle =  $this->title = $questionnaire->title;
+
+        $this->toggleShowDeleteModal();
+    }
+
+    /**
+     * Delete the questionnaire entry from the database
+     */
+    public function deleteQuestionnaire()
+    {
+
+        if(!is_null($this->questionnaireId)){
+            Questionnaire::findOrFail($this->questionnaireId)->delete();
+            Log::info('Questionnaire deleted');
+        }
+
     }
 
 }

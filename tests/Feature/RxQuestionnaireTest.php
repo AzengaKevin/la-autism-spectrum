@@ -7,6 +7,7 @@ use App\Models\User;
 use Livewire\Livewire;
 use Illuminate\Support\Str;
 use App\Models\Questionnaire;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Livewire\Questionnaires;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -62,6 +63,25 @@ class RxQuestionnaireTest extends TestCase
         $this->assertEquals($questionnaireData['min_age'], Questionnaire::first()->min_age);
         $this->assertEquals($questionnaireData['description'], Questionnaire::first()->description);
         $this->assertEquals($user->id, Questionnaire::first()->user_id);        
+    }
+
+
+    /** @group questionnaires */
+    public function test_a_questionnaire_can_be_archived()
+    {
+        $this->be($user = User::factory()->create());
+
+        $questionnaire = Questionnaire::factory()->create(['user_id' => $user->id]);
+        
+        $this->assertCount(1, Auth::user()->questionnaires);
+
+        Livewire::test(Questionnaires::class)
+            ->call('showConfirmQuestionnaireDeletionModal', $questionnaire)
+            ->call('deleteQuestionnaire');
+
+        $this->assertCount(0, Questionnaire::all());
+        $this->assertFalse(Questionnaire::where('slug', 'test')->exists());
+
     }
 }
 
