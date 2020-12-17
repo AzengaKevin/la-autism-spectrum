@@ -21,4 +21,10 @@ Route::group([
     Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
     Route::get('/user/settings', fn() => view('settings.show'))->name('settings.show');
     Route::get('/user/questionnaires', fn() => view('questionnaires'))->name('questionnaires');
+    Route::get('/user/questionnaires/{questionnaire:slug}/questions', 'QuestionController@index')
+        ->name('questionnaires.questions.index');
+    Route::get('/user/questionnaires/{questionnaire:slug}/questions/create', 'QuestionController@create')
+        ->name('questionnaires.questions.create');
+    Route::post('/user/questionnaires/{questionnaire:slug}/questions', 'QuestionController@store')
+        ->name('questionnaires.questions.store');
 });
