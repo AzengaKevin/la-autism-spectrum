@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Question;
-use App\Models\Questionnaire;
+use App\Models\ScreeningResponse;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class QuestionFactory extends Factory
+class ScreeningResponseFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Question::class;
+    protected $model = ScreeningResponse::class;
 
     /**
      * Define the model's default state.
@@ -23,8 +22,7 @@ class QuestionFactory extends Factory
     public function definition()
     {
         return [
-            'questionnaire_id' => Questionnaire::factory(),
-            'question' => $this->faker->sentence
+            //
         ];
     }
 }
