@@ -72,6 +72,7 @@ class QuestionnaireQuestionsMgtTest extends TestCase
         $this->be($user = User::first());
         
         $question = Question::factory()->make()->toArray();
+        unset($question['questionnaire_id']);
         $answers = Answer::factory()->times(4)->make()->toArray();
 
         $response = $this->post(route('questionnaires.questions.store', $user->questionnaires->first()),[

@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn() => view('welcome'));
+Route::get('/', fn() => view('welcome'))
+    ->name('home');
 
 Route::group([
     'middleware' => ['auth:sanctum', 'auth', 'verified'],
@@ -28,3 +29,6 @@ Route::group([
     Route::post('/user/questionnaires/{questionnaire:slug}/questions', 'QuestionController@store')
         ->name('questionnaires.questions.store');
 });
+
+Route::get('screenings', 'ScreeningController@index')->name('screenings.index');
+Route::get('screenings/{questionnaire:slug}', 'ScreeningController@show')->name('screenings.show');
