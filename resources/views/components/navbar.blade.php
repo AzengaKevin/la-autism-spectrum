@@ -43,7 +43,7 @@
 
                 @guest
                 <a href="{{ route('login') }}"
-                    class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    class="bg-white p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <span class="sr-only">View notifications</span>
                     <!-- Heroicon name: bell -->
                     <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">

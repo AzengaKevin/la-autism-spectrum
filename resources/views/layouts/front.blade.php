@@ -1,7 +1,5 @@
 <x-guest-layout>
     <x-navbar />
-
-    @section('content')
-        
-    @endsection
+    
+    @yield('content')
 </x-guest-layout>
