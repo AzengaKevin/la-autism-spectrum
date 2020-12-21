@@ -60,10 +60,19 @@ class User extends Authenticatable
     ];
 
     /**
-     * Questionnaire relationship
+     * User Questionnaire relationship
      */
     public function questionnaires()
     {
         return $this->hasMany(Questionnaire::class);
     }
+
+    /**
+     * User Screening Relationship
+     */
+    public function screenings()
+    {
+        return $this->hasMany(Screening::class);
+    }
 }
+

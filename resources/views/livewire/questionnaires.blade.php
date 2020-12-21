@@ -44,7 +44,8 @@
                                 <td class="px-3 py-2">{{ $index + 1 }}</td>
                                 <td class="px-3 py-2">{{ $questionnaire->title }}</td>
                                 <td class="px-3 py-2"><a class=" text-indigo-500 hover:text-indigo-900"
-                                        href="{{ route('questionnaires.questions.index', $questionnaire) }}">{{ $questionnaire->slug }}</a></td>
+                                        href="{{ route('questionnaires.questions.index', $questionnaire) }}">{{ $questionnaire->slug }}</a>
+                                </td>
                                 <td class="px-3 py-2">{{ $questionnaire->description }}</td>
                                 <td class="px-3 py-2 text-center inline-flex space-x-2">
                                     <x-jet-secondary-button type="button"
@@ -70,6 +71,10 @@
                                 </td>
                             </tr>
                             @endforeach
+                            @else
+                            <tr>
+                                <td class="px-3 py-2" colspan="5">You have no questionnaires created yet...</td>
+                            </tr>
                             @endif
                         </tbody>
                     </table>
@@ -149,7 +154,9 @@
         </x-slot>
 
         <x-slot name="content">
-            {!! __('Are you sure you want to delete your the questionnaire, <b>' . $questionnaireTitle .'</b>? The Questionnaire will be archived for a month after which it will permanently be removed from the database.') !!}
+            {!! __('Are you sure you want to delete your the questionnaire, <b>' . $questionnaireTitle .'</b>? The
+            Questionnaire will be archived for a month after which it will permanently be removed from the database.')
+            !!}
         </x-slot>
 
         <x-slot name="footer">

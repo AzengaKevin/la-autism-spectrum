@@ -28,4 +28,12 @@ class Questionnaire extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    /**
+     * Questionnaire Screenings Relationship
+     */
+    public function screenings()
+    {
+        return $this->hasMany(Screening::class);
+    }
 }

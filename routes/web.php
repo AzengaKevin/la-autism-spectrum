@@ -32,3 +32,4 @@ Route::group([
 
 Route::get('screenings', 'ScreeningController@index')->name('screenings.index');
 Route::get('screenings/{questionnaire:slug}', 'ScreeningController@show')->name('screenings.show');
+Route::post('screenings/{questionnaire:slug}', 'ScreeningController@store')->name('screenings.store');
