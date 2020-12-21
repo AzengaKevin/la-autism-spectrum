@@ -1,10 +1,10 @@
 <div class="p-6 bg-white border-b border-gray-200">
 
     <div class="flex items-center justify-end py-2">
-        <x-jet-button wire:click="$toggle('showUpsertModal')" type="button">Create Questionnaire</x-jet-button>
+        <x-jet-button wire:click="$toggle('showUpsertModal')" type="button">Add Role</x-jet-button>
     </div>
 
-    {{-- Questionnaires Table --}}
+    {{-- Roles Table --}}
 
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -23,10 +23,6 @@
                                 </th>
                                 <th
                                     class="px-3 py-2 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wide">
-                                    Link
-                                </th>
-                                <th
-                                    class="px-3 py-2 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wide">
                                     Description
                                 </th>
                                 <th
@@ -38,18 +34,15 @@
  
                         <tbody class="bg-white divide-y divide-gray-200">
 
-                            @if ($questionnaires->count())
-                            @foreach ($questionnaires as $index => $questionnaire)
+                            @if ($roles->count())
+                            @foreach ($roles as $index => $role)
                             <tr>
                                 <td class="px-3 py-2">{{ $index + 1 }}</td>
-                                <td class="px-3 py-2">{{ $questionnaire->title }}</td>
-                                <td class="px-3 py-2"><a class=" text-indigo-500 hover:text-indigo-900"
-                                        href="{{ route('questionnaires.questions.index', $questionnaire) }}">{{ $questionnaire->slug }}</a>
-                                </td>
-                                <td class="px-3 py-2">{{ $questionnaire->description }}</td>
+                                <td class="px-3 py-2">{{ $role->title }}</td>
+                                <td class="px-3 py-2">{{ $role->description }}</td>
                                 <td class="px-3 py-2 text-center inline-flex space-x-2">
                                     <x-jet-secondary-button type="button"
-                                        wire:click.prevent="showEditQuestionnaireModal({{ $questionnaire }})">
+                                        wire:click.prevent="showEditRoleModal({{ $role }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path
@@ -59,7 +52,7 @@
                                         </svg>
                                     </x-jet-secondary-button>
                                     <x-jet-secondary-button type="button"
-                                        wire:click.prevent="showConfirmQuestionnaireDeletionModal({{ $questionnaire }})">
+                                        wire:click.prevent="showConfirmRoleDeletionModal({{ $role }})">
                                         <svg class="fill-current text-red-700" xmlns="http://www.w3.org/2000/svg"
                                             width="16" height="16" viewBox="0 0 16 16">
                                             <path
@@ -73,7 +66,7 @@
                             @endforeach
                             @else
                             <tr>
-                                <td class="px-3 py-2" colspan="5">You have no questionnaires created yet...</td>
+                                <td class="px-3 py-2" colspan="5">You have no roles created yet...</td>
                             </tr>
                             @endif
                         </tbody>
@@ -83,47 +76,31 @@
         </div>
     </div>
 
-    <!-- Insert or Update questionnaire Modal -->
+    <!-- Insert or Update role Modal -->
     <x-jet-dialog-modal wire:model="showUpsertModal">
         <x-slot name="title">
             <span
-                class=" font-semibold">{{ __( is_null($questionnaireId) ? 'Create New Questionnaire' : 'Update ' . $questionnaireTitle) }}</span>
+                class=" font-semibold">{{ __( is_null($roleId) ? 'Create New Role' : 'Update ' . $roleTitle . ' role') }}</span>
         </x-slot>
 
         <x-slot name="content">
 
-            @if (is_null($questionnaireId))
-            <div>The questions and answers are added after adding the questionnaire</div>
-            @endif
-
             <div class="mt-4">
                 <x-jet-label for="title" value="{{ __('Title') }}" />
-                <x-jet-input id="title" class="block mt-1 w-full" type="text" wire:model.debounce.300ms="title" />
+                <x-jet-input id="title" class="block mt-1 w-full" type="text" wire:model="title" />
                 <x-jet-input-error for="title" class="mt-2" />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="slug" value="{{ __('Slug') }}" />
-                <x-jet-input id="slug" class="block mt-1 w-full" type="text" wire:model="slug" />
-                <x-jet-input-error for="slug" class="mt-2" />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="min_age" value="{{ __('Minimum Age') }}" />
-                <x-jet-input id="min_age" class="block mt-1 w-full" type="number" wire:model="min_age" />
-                <x-jet-input-error for="min_age" class="mt-2" />
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="description" value="{{ __('Description') }}" />
                 <div class="mt-1 ">
                     <textarea id="description" rows="3" class="form-input rounded-md shadow-sm block mt-1 w-full"
-                        wire:model.debounce.36000ms="description">
+                        wire:model="description">
                   </textarea>
                 </div>
                 <x-jet-input-error for="description" class="mt-2" />
                 <p class="mt-2 text-sm text-gray-500">
-                    Brief description for your profile. URLs are hyperlinked.
+                    Brief description for the role in question.
                 </p>
             </div>
 
@@ -134,28 +111,27 @@
                 {{ __('Nevermind') }}
             </x-jet-secondary-button>
 
-            @if (is_null($questionnaireId))
-            <x-jet-button class="ml-2" wire:click="createQuestionnaire" wire:loading.attr="disabled">
+            @if (is_null($roleId))
+            <x-jet-button class="ml-2" wire:click="createRole" wire:loading.attr="disabled">
                 {{ __('Submit') }}
             </x-jet-button>
             @else
-            <x-jet-button class="ml-2" wire:click="updateQuestionnaire" wire:loading.attr="disabled">
+            <x-jet-button class="ml-2" wire:click="updateRole" wire:loading.attr="disabled">
                 {{ __('Update') }}
             </x-jet-button>
             @endif
         </x-slot>
     </x-jet-dialog-modal>
 
-    {{-- Delete Questionnaire Modal --}}
+    {{-- Delete Role Modal --}}
 
     <x-jet-dialog-modal wire:model="showDeleteModal">
         <x-slot name="title">
-            {{ __('Delete A Questionnaire') }}
+            {{ __('Delete A Role') }}
         </x-slot>
 
         <x-slot name="content">
-            {!! __('Are you sure you want to delete your the questionnaire, <b>' . $questionnaireTitle .'</b>? The
-            Questionnaire will be archived for a month after which it will permanently be removed from the database.')
+            {!! __('Are you sure you want to delete the role, <b>' . $roleTitle .'</b>? The Role Will be Deleted and the consequently the associated users.')
             !!}
         </x-slot>
 
@@ -164,8 +140,8 @@
                 {{ __('Nevermind') }}
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-2" wire:click="deleteQuestionnaire" wire:loading.attr="disabled">
-                {{ __('Delete Questionnaire') }}
+            <x-jet-danger-button class="ml-2" wire:click="deleteRole" wire:loading.attr="disabled">
+                {{ __('Delete Role') }}
             </x-jet-danger-button>
         </x-slot>
     </x-jet-dialog-modal>

@@ -38,14 +38,14 @@ class ScreeningController extends Controller
             'responses' => ['bail', 'required', 'array', 'min:1'],
             'responses.*.question_id' => ['bail', 'required', 'numeric'],
             'responses.*.answer_id' => ['bail', 'required', 'numeric'],
-            'respondant' => ['bail', 'array'],
+            'respondent' => ['bail', 'array'],
         ]);
         
         $screeningData = [];
 
-        if(isset($data['respondant'])){
-            $screeningData['name'] = $data['respondant']['name'];
-            $screeningData['email'] = $data['respondant']['email'];
+        if(isset($data['respondent'])){
+            $screeningData['name'] = $data['respondent']['name'];
+            $screeningData['email'] = $data['respondent']['email'];
         }else{
             if(Auth::check()){
                 $screeningData['user_id'] = Auth::id();

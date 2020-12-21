@@ -28,6 +28,8 @@ Route::group([
         ->name('questionnaires.questions.create');
     Route::post('/user/questionnaires/{questionnaire:slug}/questions', 'QuestionController@store')
         ->name('questionnaires.questions.store');
+
+    Route::get('/roles', 'RolesController@index')->name('roles.index');
 });
 
 Route::get('screenings', 'ScreeningController@index')->name('screenings.index');

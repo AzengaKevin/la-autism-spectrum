@@ -69,7 +69,7 @@ class PublicScreeningTest extends TestCase
         }
             
         $response = $this->post(route('screenings.store', $questionnaire), [
-            'respondant' => [
+            'respondent' => [
                 'name' => 'Azenga Kevin', 
                 'email' => 'azenga.kevin7@gmail.com'
             ],
@@ -78,7 +78,6 @@ class PublicScreeningTest extends TestCase
 
         $this->assertTrue(Screening::where('questionnaire_id', $questionnaire->id)->exists());
         $this->assertCount(4, Screening::where('questionnaire_id', $questionnaire->id)->first()->responses);
-
 
         $response->assertRedirect(route('screenings.index'));
         
