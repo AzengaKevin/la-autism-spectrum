@@ -29,22 +29,29 @@
                     </x-jet-nav-link>
                 </div>
 
+                @can('viewAny', \App\Models\Questionnaire::class)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('questionnaires') }}" :active="request()->routeIs('questionnaires')">
                         {{ __('Questionnaires') }}
                     </x-jet-nav-link>
                 </div>
+                @endcan
 
+                @can('viewAny', \App\Models\Role::class)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('roles.index')">
                         {{ __('Roles') }}
                     </x-jet-nav-link>
                 </div>
+                @endcan
+
+                @can('viewAny', \App\Models\User::class)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                         {{ __('Users') }}
                     </x-jet-nav-link>
                 </div>
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->
@@ -151,15 +158,24 @@
             <x-jet-responsive-nav-link href="{{ route('settings.show') }}" :active="request()->routeIs('settings.show')">
                 {{ __('Settings') }}
             </x-jet-responsive-nav-link>
+
+            @can('viewAny', \App\Models\Questionnaire::class)
             <x-jet-responsive-nav-link href="{{ route('questionnaires') }}" :active="request()->routeIs('questionnaires')">
                 {{ __('Questionnaires') }}
             </x-jet-responsive-nav-link>
+            @endcan
+
+            @can('viewAny', \App\Models\Role::class)
             <x-jet-responsive-nav-link href="{{ route('roles.index') }}" :active="request()->routeIs('roles.index')">
                 {{ __('Roles') }}
             </x-jet-responsive-nav-link>
+            @endcan
+
+            @can('viewAny', \App\Models\User::class)
             <x-jet-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
                 {{ __('Users') }}
             </x-jet-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
