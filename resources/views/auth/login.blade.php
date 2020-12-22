@@ -1,7 +1,14 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <div  class="flex flex-col items-center">
+                <x-jet-authentication-card-logo />
+    
+                <div class="text-center">
+                    <div class="font-black text-4xl">Sign in to your account</div>
+                    <div><span class="text-gray-500">Or</span> <a class="text-teal-300" href="{{ route('register') }}">Create a new account</a></div>
+                </div>
+            </div>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -12,7 +19,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" novalidate>
             @csrf
 
             <div>
