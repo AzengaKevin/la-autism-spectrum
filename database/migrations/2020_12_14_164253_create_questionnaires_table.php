@@ -18,7 +18,7 @@ class CreateQuestionnairesTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->string('slug', 32);
-            $table->mediumText('description');
+            $table->text('description');
             $table->integer('min_age');
             $table->boolean('published')->default(false);
             $table->timestamps();

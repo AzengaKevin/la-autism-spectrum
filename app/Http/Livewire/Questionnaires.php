@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use App\Models\Questionnaire;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,17 +34,7 @@ class Questionnaires extends Component
     public $description;
 
     public $questionnaireId;
-    public $questionnaireTitle;
-
-    /**
-     * Validation rules
-     */
-    protected $rules = [
-        'title' => ['bail', 'required', 'max:255', 'string'],
-        'slug' => ['bail', 'required', 'unique:questionnaires,slug'],
-        'min_age' => ['bail', 'required', 'between:1,100', 'numeric'],
-        'description' => ['bail', 'required', 'between:40,200', 'string'],
-    ];   
+    public $questionnaireTitle; 
     
     
     protected $validationAttributes = [
@@ -88,7 +79,7 @@ class Questionnaires extends Component
      */
     public function readQuestionnaires()
     {
-        return Auth::user()->questionnaires;
+        return Questionnaire::all();
     }
 
     /**
@@ -190,6 +181,19 @@ class Questionnaires extends Component
             Log::info('Questionnaire deleted');
         }
 
+    }
+
+    /**
+     * Validation rules
+     */
+    public function rules() : array
+    {
+        return [
+            'title' => ['bail', 'required', 'max:255', 'string'],
+            'slug' => ['bail', 'required', Rule::unique('questionnaires')->ignore($this->questionnaireId)],
+            'min_age' => ['bail', 'required', 'between:1,100', 'numeric'],
+            'description' => ['bail', 'required', 'between:40,1000', 'string'],
+        ];
     }
 
 }

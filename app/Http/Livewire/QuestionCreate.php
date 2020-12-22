@@ -3,10 +3,15 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class QuestionCreate extends Component
 {
+    use WithFileUploads;
+    
     public $questionnaire;
+
+    public $photo;
 
     public $answers = [''];
     
@@ -26,5 +31,10 @@ class QuestionCreate extends Component
         unset($this->answers[$index]);
 
         $this->answers = array_values($this->answers);
+    }
+
+    public function updatedPhoto($photo)
+    {
+        info("Photo Update");
     }
 }

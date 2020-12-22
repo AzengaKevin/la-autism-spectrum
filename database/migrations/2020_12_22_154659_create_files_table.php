@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuestionsTable extends Migration
+class CreateFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
+            
             $table->id();
-            $table->foreignId('questionnaire_id')->constrained()->onDelete('cascade');
-            $table->string('question');
+            $table->morphs('fileable');
+            $table->string('path');
+            $table->string('alt')->nullable();
+
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('files');
     }
 }
