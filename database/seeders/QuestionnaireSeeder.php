@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Questionnaire;
 use Illuminate\Database\Seeder;
 
 class QuestionnaireSeeder extends Seeder
@@ -13,6 +14,10 @@ class QuestionnaireSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Questionnaire::factory()
+            ->times(12)
+            ->hasQuestions(5)
+            ->create();
+
     }
 }

@@ -15,8 +15,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        $perssions = [
-            
+        $permissions = [
             'create-role',
             'read-role',
             'update-role',

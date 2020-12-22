@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -14,8 +15,22 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
+        $adminRole = Role::firstOrCreate(
+            ['title' => 'Admin'],
+            ['description' => 'Should have all the permissions'],
+        );
 
-        User::factory()->create(['name' => 'Azenga Kevin', 'email' => 'azenga.kevin7@gmail.com']);
+        $defaultRole = Role::firstOrCreate(
+            ['title' => 'Default'],
+            ['description' => 'No permission at all'],
+        );
+
+        User::factory(10)->create(['role_id' => $defaultRole->id]);
+
+        User::factory()->create([
+            'name' => 'Azenga Kevin', 
+            'email' => 'azenga.kevin7@gmail.com', 
+            'role_id' => $adminRole->id
+        ]);
     }
 }
