@@ -1,10 +1,10 @@
-<nav class="bg-white shadow" x-data="{ menuOpen: false, dropdownOpen : false }">
+<nav class="bg-teal-800 shadow" x-data="{ menuOpen: false, dropdownOpen : false }">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <!-- Mobile menu button-->
                 <button @click="menuOpen = !menuOpen"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-teal-400 hover:text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                     aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <svg x-show="!menuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -20,22 +20,15 @@
                 </button>
             </div>
             <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div class="flex-shrink-0 flex items-center">
+                <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center">
                     <x-jet-application-mark class="h-10 w-10" />
                     <h1 class="text-white font-bold text-2xl hidden sm:block">
                         {{ config('app.name', 'Autism Spectrum') }}</h1>
-                </div>
+                </a>
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4">
-                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a href="{{ route('screenings.index') }}"
-                            class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Questionnaires</a>
-                        <a href="#"
-                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
-                        <a href="#"
-                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-                        <a href="#"
-                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+                            class="bg-teal-900 text-white px-3 py-2 rounded-md text-sm font-medium">Questionnaires</a>
                     </div>
                 </div>
             </div>
@@ -43,7 +36,7 @@
 
                 @guest
                 <a href="{{ route('login') }}"
-                    class="bg-white p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    class="bg-white p-1 rounded-full text-teal-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-white">
                     <span class="sr-only">Login</span>
                     <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                         <defs />
@@ -62,7 +55,7 @@
                 <div class="ml-3 relative">
                     <div>
                         <button @click="dropdownOpen = !dropdownOpen"
-                            class="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                            class="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-white"
                             id="user-menu" aria-haspopup="true">
                             <span class="sr-only">Open user menu</span>
                             <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
@@ -83,11 +76,11 @@
                         class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                         <a href="{{ route('dashboard') }}"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            class="block px-4 py-2 text-sm text-teal-700 hover:bg-teal-100"
                             role="menuitem">Dashboard</a>
                         <a href="{{ route('settings.show') }}"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign
+                            class="block px-4 py-2 text-sm text-teal-700 hover:bg-teal-100" role="menuitem">Settings</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-teal-700 hover:bg-teal-100" role="menuitem">Sign
                             out</a>
                     </div>
                 </div>
@@ -99,14 +92,8 @@
 
     <div x-show="menuOpen" class="sm:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-            <a href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-            <a href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-            <a href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+            <a href="{{ route('screenings.index') }}"
+                class="bg-teal-900 text-white block px-3 py-2 rounded-md text-base font-medium">Questionnaires</a>
         </div>
     </div>
 </nav>
