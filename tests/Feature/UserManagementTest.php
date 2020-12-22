@@ -35,6 +35,7 @@ class UserManagementTest extends TestCase
         $response->assertOk();
 
         $response->assertViewIs('users.index');
-        $response->assertViewHas('users');
+
+        $response->assertSeeLivewire('users');
     }
 }
