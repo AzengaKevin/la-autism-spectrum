@@ -30,6 +30,8 @@ Route::group([
         ->name('questionnaires.questions.store');
 
     Route::get('/roles', 'RolesController@index')->name('roles.index');
+
+    Route::resource('users', 'UsersController');
 });
 
 Route::get('screenings', 'ScreeningController@index')->name('screenings.index');

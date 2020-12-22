@@ -75,5 +75,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Screening::class);
     }
+
+    /**
+     * User Role Relationship
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }
 
