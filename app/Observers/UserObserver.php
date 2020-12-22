@@ -15,12 +15,15 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $role = Role::firstOrCreate(
-            ['title' => 'Default'],
-            ['description' => 'Have no extra permissions permissions'],
-        );
 
-        $user->update(['role_id' => $role->id]);
+        if(is_null($user->role_id)){
+            $role = Role::firstOrCreate(
+                ['title' => 'Default'],
+                ['description' => 'Have no extra permissions permissions'],
+            );
+
+            $user->update(['role_id' => $role->id]);
+        }
 
     }
 

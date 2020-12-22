@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Questionnaire;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class QuestionnairePolicy
+class UserPolicy
 {
     use HandlesAuthorization;
 
@@ -18,17 +17,17 @@ class QuestionnairePolicy
      */
     public function viewAny(User $user)
     {
-        return optional($user)->role->permissions->pluck('title')->contains('read-questionnaire');
+        return optional($user)->role->permissions->pluck('title')->contains('read-user');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Questionnaire  $questionnaire
+     * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function view(User $user, Questionnaire $questionnaire)
+    public function view(User $user, User $model)
     {
         //
     }
@@ -48,10 +47,10 @@ class QuestionnairePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Questionnaire  $questionnaire
+     * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function update(User $user, Questionnaire $questionnaire)
+    public function update(User $user, User $model)
     {
         //
     }
@@ -60,10 +59,10 @@ class QuestionnairePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Questionnaire  $questionnaire
+     * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function delete(User $user, Questionnaire $questionnaire)
+    public function delete(User $user, User $model)
     {
         //
     }
@@ -72,10 +71,10 @@ class QuestionnairePolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Questionnaire  $questionnaire
+     * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function restore(User $user, Questionnaire $questionnaire)
+    public function restore(User $user, User $model)
     {
         //
     }
@@ -84,10 +83,10 @@ class QuestionnairePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Questionnaire  $questionnaire
+     * @param  \App\Models\User  $model
      * @return mixed
      */
-    public function forceDelete(User $user, Questionnaire $questionnaire)
+    public function forceDelete(User $user, User $model)
     {
         //
     }

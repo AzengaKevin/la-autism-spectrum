@@ -14,12 +14,24 @@ class RoleManagementTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp() : void
+    {
+        parent::setUp();
+
+        $this->artisan('db:seed');
+        
+        $role = Role::firstOrCreate(
+            ['title' => 'Admin'],
+            ['description' => 'Should have all the permissions'],
+        );
+
+        $this->be(User::factory()->create(['role_id' => $role->id]));
+    }
+
     /** @group roles */
     public function test_admin_can_manage_role()
     {
         $this->withoutExceptionHandling();
-
-        $this->actingAs(User::factory()->create());
 
         $response = $this->get(route('roles.index'));
 

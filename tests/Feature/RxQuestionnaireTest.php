@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\Role;
 use App\Models\User;
 use Livewire\Livewire;
 use Illuminate\Support\Str;
@@ -16,10 +17,23 @@ class RxQuestionnaireTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp() : void 
+    {
+        parent::setUp();
+
+        $this->artisan('db:seed');
+    }
+
     /** @group questionnaires */
     public function test_a_questionnaire_can_be_created()
     {
-        $this->be($user = User::factory()->create());
+        
+        $role = Role::firstOrCreate(
+            ['title' => 'Admin'],
+            ['description' => 'Should have all the permissions'],
+        );
+
+        $this->be($user = User::factory()->create(['role_id' => $role->id]));
 
         $questionnaireData = Questionnaire::factory()->make()->toArray();
 
