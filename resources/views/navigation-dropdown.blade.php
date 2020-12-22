@@ -123,8 +123,7 @@
 
                             <div class="border-t border-gray-100"></div>
                         @endif
-
-                        <!-- Authentication -->
+                        
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 

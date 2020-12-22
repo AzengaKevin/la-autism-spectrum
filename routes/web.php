@@ -19,7 +19,7 @@ Route::get('/', fn() => view('welcome'))
 Route::group([
     'middleware' => ['auth:sanctum', 'auth', 'verified'],
 ], function(){
-    Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::get('/user/settings', fn() => view('settings.show'))->name('settings.show');
     Route::get('/user/questionnaires', fn() => view('questionnaires'))->name('questionnaires')
         ->middleware('can:viewAny,App\Models\Questionnaire');
