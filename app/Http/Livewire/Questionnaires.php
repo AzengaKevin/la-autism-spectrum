@@ -196,7 +196,7 @@ class Questionnaires extends Component
             'slug' => ['bail', 'required', Rule::unique('questionnaires')->ignore($this->questionnaireId)],
             'age' => ['bail', 'required', 'string'],
             'type' => ['bail', 'required', 'string', 'max:20'],
-            'description' => ['bail', 'required', 'between:100,320', 'string'],
+            'description' => ['bail', 'required', 'string'],
         ];
     }
 

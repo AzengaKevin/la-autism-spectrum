@@ -41,7 +41,9 @@ class Pictures extends Component
     
     public function render()
     {
-        return view('livewire.pictures');
+        return view('livewire.pictures', [
+            'pictures' => $this->readPictures()
+        ]);
     }
 
     /**
@@ -58,9 +60,9 @@ class Pictures extends Component
         //Create Thumbnail
         $image = Image::make($this->picture->getRealPath())->fit(600, 400);
 
-        $thumbnail = public_path('storage/' . $this->createThumbnailFolderIfAbscent() . Str::random(16) . '.' . $this->picture->extension());
+        $thumbnail = "questionnaires/pictures/" . Str::random(16) . '.' . $this->picture->extension();
 
-        $image->save($thumbnail, 33); //33% quality
+        $image->save(public_path('storage/' . $thumbnail), 33); //33% quality
 
         //Store the picture and the details
         $this->questionnaire->pictures()->create([
@@ -72,6 +74,11 @@ class Pictures extends Component
         info('Picture Saved');
 
         $this->toggleShowUpsertModal();
+    }
+
+    public function readPictures()
+    {
+        return $this->questionnaire->pictures;
     }
 
     /**
@@ -90,18 +97,6 @@ class Pictures extends Component
         if(!$flag){
             $this->reset(['alt', 'picture', 'pictureId']);
         }
-    }
-
-    private function createThumbnailFolderIfAbscent() : string
-    {
-        $directory = "questionnaires/pictures/";
-
-        if(!Storage::disk('public')->exists($directory)){
-            Storage::disk('public')->makeDirectory($directory);
-            info('Directory Created');
-        }
-
-        return $directory;
     }
 
 }

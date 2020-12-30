@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Picture extends Model
 {
@@ -17,5 +18,15 @@ class Picture extends Model
     public function questionnaire()
     {
         return $this->belongsTo(Questionnaire::class);
+    }
+
+    public function pathUrl() : string
+    {
+        return Storage::disk('public')->url($this->path);
+    }
+
+    public function thumbnailUrl()
+    {
+        return Storage::disk('public')->url($this->thumbnail);
     }
 }
