@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Picture;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Questionnaire;
@@ -22,6 +23,7 @@ class Pictures extends Component
     public $picture;
 
     public $pictureId;
+    public $picthumbnailUrl;
 
     public function rules()
     {
@@ -76,9 +78,35 @@ class Pictures extends Component
         $this->toggleShowUpsertModal();
     }
 
+    /**
+     * Get all pictures for the questionnaire
+     */
     public function readPictures()
     {
         return $this->questionnaire->pictures;
+    }
+
+    public function deletePicture()
+    {
+        if(!is_null($this->pictureId)) Picture::destroy($this->pictureId);
+
+        $this->toggleShowDeleteModal();
+    }
+
+    /**
+     * Show the delete modal for the specified picture
+     * 
+     * @param Picture $picture the picture to delete
+     */
+    public function showDeletePictureModal(Picture $picture)
+    {
+
+        $this->pictureId = $picture->id;
+
+        $this->picthumbnailUrl = $picture->thumbnailUrl();
+
+        $this->toggleShowDeleteModal();
+        
     }
 
     /**
@@ -87,6 +115,14 @@ class Pictures extends Component
     public function toggleShowUpsertModal()
     {
         $this->showUpsertModal = !$this->showUpsertModal;
+    }
+
+    /**
+     * Toggle the visibility of the delete modal
+     */
+    public function toggleShowDeleteModal()
+    {
+        $this->showDeleteModal = !$this->showDeleteModal;
     }
 
     /**
