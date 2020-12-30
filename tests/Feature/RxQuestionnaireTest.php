@@ -27,6 +27,7 @@ class RxQuestionnaireTest extends TestCase
     /** @group questionnaires */
     public function test_a_questionnaire_can_be_created()
     {
+        $this->withoutExceptionHandling();
         
         $role = Role::firstOrCreate(
             ['title' => 'Admin'],
@@ -39,15 +40,15 @@ class RxQuestionnaireTest extends TestCase
 
         Livewire::test(Questionnaires::class)
             ->set('title', $questionnaireData['title'])
-            ->set('min_age', $questionnaireData['min_age'])
-            ->set('description', $questionnaireData['description'])
+            ->set('age', $questionnaireData['age'])
+            ->set('type', $questionnaireData['type'])
             ->call('createQuestionnaire');
 
         $this->assertCount(1, Questionnaire::all());
         $this->assertTrue(Questionnaire::where('slug', Str::slug($questionnaireData['title']))->exists());
 
         $this->assertEquals($questionnaireData['title'], Questionnaire::first()->title);
-        $this->assertEquals($questionnaireData['min_age'], Questionnaire::first()->min_age);
+        $this->assertEquals($questionnaireData['age'], Questionnaire::first()->age);
         $this->assertEquals($questionnaireData['description'], Questionnaire::first()->description);
         $this->assertEquals($user->id, Questionnaire::first()->user_id);
     }
@@ -65,8 +66,8 @@ class RxQuestionnaireTest extends TestCase
             ->call('showEditQuestionnaireModal', $questionnaire)
             ->set('title', $questionnaireData['title'])
             ->set('slug', 'test')
-            ->set('min_age', $questionnaireData['min_age'])
-            ->set('description', $questionnaireData['description'])
+            ->set('type', 'video')
+            ->set('age', $questionnaireData['age'])
             ->call('updateQuestionnaire');
 
         $this->assertCount(1, Questionnaire::all());
@@ -74,8 +75,7 @@ class RxQuestionnaireTest extends TestCase
         $this->assertTrue(Questionnaire::where('slug', 'test')->exists());
 
         $this->assertEquals($questionnaireData['title'], Questionnaire::first()->title);
-        $this->assertEquals($questionnaireData['min_age'], Questionnaire::first()->min_age);
-        $this->assertEquals($questionnaireData['description'], Questionnaire::first()->description);
+        $this->assertEquals($questionnaireData['age'], Questionnaire::first()->age);
         $this->assertEquals($user->id, Questionnaire::first()->user_id);        
     }
 

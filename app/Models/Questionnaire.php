@@ -11,7 +11,7 @@ class Questionnaire extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['user_id', 'title', 'slug', 'description', 'min_age'];
+    protected $fillable = ['user_id', 'title', 'slug', 'description', 'age', 'type'];
 
     /**
      * Associating a questionnaire to its owner
@@ -35,5 +35,10 @@ class Questionnaire extends Model
     public function screenings()
     {
         return $this->hasMany(Screening::class);
+    }
+
+    public static function types() : array
+    {
+        return ['questions', 'pictures', 'video'];
     }
 }

@@ -16,10 +16,10 @@ class CreateQuestionnairesTable extends Migration
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('title');
+            $table->string('title', 64);
             $table->string('slug', 32);
-            $table->text('description');
-            $table->integer('min_age');
+            $table->mediumText('description')->nullable();
+            $table->string('age');
             $table->boolean('published')->default(false);
             $table->timestamps();
             $table->softDeletes();

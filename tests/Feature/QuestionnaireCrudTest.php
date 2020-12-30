@@ -21,9 +21,8 @@ class QuestionnaireCrudTest extends TestCase
         $this->assertCount(1, Questionnaire::all());
 
         $this->assertEquals($questionnaireData['title'], $questionnaire->title);
-        $this->assertEquals($questionnaireData['description'], $questionnaire->description);
         $this->assertEquals($questionnaireData['user_id'], $questionnaire->user_id);
-        $this->assertEquals($questionnaireData['min_age'], $questionnaire->min_age);
+        $this->assertEquals($questionnaireData['age'], $questionnaire->age);
     }
 
     /** @group questionnaires */
@@ -50,9 +49,8 @@ class QuestionnaireCrudTest extends TestCase
         $questionnaire->update($questionnaireData);
 
         $this->assertEquals($questionnaireData['title'], $questionnaire->title);
-        $this->assertEquals($questionnaireData['description'], $questionnaire->description);
         $this->assertEquals($questionnaireData['user_id'], $questionnaire->user_id);
-        $this->assertEquals($questionnaireData['min_age'], $questionnaire->min_age);
+        $this->assertEquals($questionnaireData['age'], $questionnaire->age);
         
     }
 

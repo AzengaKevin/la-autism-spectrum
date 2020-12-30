@@ -27,7 +27,11 @@
                                 </th>
                                 <th
                                     class="px-3 py-2 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wide">
-                                    Description
+                                    Type
+                                </th>
+                                <th
+                                    class="px-3 py-2 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wide">
+                                    Age
                                 </th>
                                 <th
                                     class="px-3 py-2 text-center text-xs leading-4 font-medium text-gray-500 uppercase tracking-wide">
@@ -46,8 +50,9 @@
                                 <td class="px-3 py-2"><a class=" text-indigo-500 hover:text-indigo-900"
                                         href="{{ route('questionnaires.questions.index', $questionnaire) }}">{{ $questionnaire->slug }}</a>
                                 </td>
-                                <td class="px-3 py-2">{{ $questionnaire->description }}</td>
-                                <td class="px-3 py-2 text-center inline-flex space-x-2">
+                                <td class="px-3 py-2">{{ $questionnaire->type }}</td>
+                                <td class="px-3 py-2">{{ $questionnaire->age }}</td>
+                                <td class="px-3 py-2 text-center inline-flex w-full justify-around space-x-2">
                                     <x-jet-secondary-button type="button"
                                         wire:click.prevent="showEditQuestionnaireModal({{ $questionnaire }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -108,10 +113,24 @@
                 <x-jet-input-error for="slug" class="mt-2" />
             </div>
 
-            <div class="mt-4">
-                <x-jet-label for="min_age" value="{{ __('Minimum Age') }}" />
-                <x-jet-input id="min_age" class="block mt-1 w-full" type="number" wire:model="min_age" />
-                <x-jet-input-error for="min_age" class="mt-2" />
+            <div class="flex flex-col sm:flex-row space-x-2">
+                <div class="mt-4 w-full sm:w-1/2">
+                    <x-jet-label for="age" value="{{ __('Age Bound') }}" />
+                    <x-jet-input id="age" class="block mt-1 w-full" type="text" wire:model="age" />
+                    <x-jet-input-error for="age" class="mt-2" />
+                </div>
+    
+                <div class="mt-4 w-full sm:w-1/2">
+                    <x-jet-label for="type" value="{{ __('Questionnaire Type') }}" />
+                    <select id="type" autocomplete="type" wire:model="type"
+                        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="">Choose...</option>
+                        @foreach (\App\Models\Questionnaire::types() as $t)
+                        <option value="{{ $t }}">{{ Str::title($t) }}</option>
+                        @endforeach
+                    </select>
+                    <x-jet-input-error for="type" class="mt-2" />
+                </div>
             </div>
 
             <div class="mt-4">

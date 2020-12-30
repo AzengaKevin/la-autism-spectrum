@@ -30,7 +30,8 @@ class Questionnaires extends Component
      */
     public $title;
     public $slug;
-    public $min_age;
+    public $age;
+    public $type;
     public $description;
 
     public $questionnaireId;
@@ -40,7 +41,8 @@ class Questionnaires extends Component
     protected $validationAttributes = [
         'title' => 'title',
         'slug' => 'slug',
-        'min_age' => 'minimum age',
+        'type' => 'type',
+        'age' => 'age',
         'description' => 'description',
     ];
 
@@ -153,7 +155,8 @@ class Questionnaires extends Component
         $this->questionnaireId = $questionnaire->id;
         $this->questionnaireTitle =  $this->title = $questionnaire->title;
         $this->slug = $questionnaire->slug;
-        $this->min_age = $questionnaire->min_age;
+        $this->age = $questionnaire->age;
+        $this->type = $questionnaire->type;
         $this->description = $questionnaire->description;
 
         $this->toggleShowUpsertModal();
@@ -189,10 +192,11 @@ class Questionnaires extends Component
     public function rules() : array
     {
         return [
-            'title' => ['bail', 'required', 'max:255', 'string'],
+            'title' => ['bail', 'required', 'max:40', 'string'],
             'slug' => ['bail', 'required', Rule::unique('questionnaires')->ignore($this->questionnaireId)],
-            'min_age' => ['bail', 'required', 'between:1,100', 'numeric'],
-            'description' => ['bail', 'required', 'between:40,1000', 'string'],
+            'age' => ['bail', 'required', 'string'],
+            'type' => ['bail', 'required', 'string', 'max:20'],
+            'description' => ['bail', 'required', 'between:100,320', 'string'],
         ];
     }
 
