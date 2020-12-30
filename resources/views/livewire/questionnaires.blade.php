@@ -48,7 +48,7 @@
                                 <td class="px-3 py-2">{{ $index + 1 }}</td>
                                 <td class="px-3 py-2">{{ $questionnaire->title }}</td>
                                 <td class="px-3 py-2"><a class=" text-indigo-500 hover:text-indigo-900"
-                                        href="{{ route('questionnaires.questions.index', $questionnaire) }}">{{ $questionnaire->slug }}</a>
+                                        href="{{ route('expert.questionnaires.questions.index', $questionnaire) }}">{{ $questionnaire->slug }}</a>
                                 </td>
                                 <td class="px-3 py-2">{{ $questionnaire->type }}</td>
                                 <td class="px-3 py-2">{{ $questionnaire->age }}</td>

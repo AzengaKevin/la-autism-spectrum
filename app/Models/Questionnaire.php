@@ -37,6 +37,19 @@ class Questionnaire extends Model
         return $this->hasMany(Screening::class);
     }
 
+    /**
+     * Questionnaire picture Relationship 1 : M
+     */
+    public function pictures()
+    {
+        return $this->hasMany(Picture::class);
+    }
+
+    /**
+     * Data function containing the type of questionnaires
+     * 
+     * @return array of the types of questionnaires
+     */
     public static function types() : array
     {
         return ['questions', 'pictures', 'video'];

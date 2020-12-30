@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Expert;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Questionnaire;
 
@@ -11,7 +12,7 @@ class QuestionController extends Controller
     {
         $questionnaire->load('questions.answers');
 
-        return view('questions.index', compact('questionnaire'));
+        return view('expert.questions.index', compact('questionnaire'));
     }
 
     /**
@@ -19,7 +20,7 @@ class QuestionController extends Controller
      */
     public function create(Questionnaire $questionnaire)
     {
-        return view('questions.create', compact('questionnaire'));
+        return view('expert.questions.create', compact('questionnaire'));
     }
 
 
@@ -38,7 +39,7 @@ class QuestionController extends Controller
         //Persist the Answers
         $question->answers()->createMany($data['answers']);
 
-        return redirect()->route('questionnaires.questions.index', $questionnaire);
+        return redirect()->route('expert.questionnaires.questions.index', $questionnaire);
     }
 
 }

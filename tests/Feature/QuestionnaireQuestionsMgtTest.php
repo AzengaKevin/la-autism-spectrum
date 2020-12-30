@@ -27,11 +27,11 @@ class QuestionnaireQuestionsMgtTest extends TestCase
 
         $this->actingAs($user = User::first());
 
-        $response = $this->get(route('questionnaires.questions.index', $user->questionnaires->first()));
+        $response = $this->get(route('expert.questionnaires.questions.index', $user->questionnaires->first()));
 
         $response->assertOk();
 
-        $response->assertViewIs('questions.index');
+        $response->assertViewIs('expert.questions.index');
 
         $response->assertViewHas('questionnaire');
 
@@ -50,10 +50,10 @@ class QuestionnaireQuestionsMgtTest extends TestCase
             
         $this->be($user = User::first());
 
-        $response = $this->get(route('questionnaires.questions.create', $user->questionnaires->first()));
+        $response = $this->get(route('expert.questionnaires.questions.create', $user->questionnaires->first()));
 
         $response->assertOk();
-        $response->assertViewIs('questions.create');
+        $response->assertViewIs('expert.questions.create');
         $response->assertViewHas('questionnaire');
         $response->assertSeeLivewire('question-create');
     }
@@ -75,7 +75,7 @@ class QuestionnaireQuestionsMgtTest extends TestCase
         unset($question['questionnaire_id']);
         $answers = Answer::factory()->times(4)->make()->toArray();
 
-        $response = $this->post(route('questionnaires.questions.store', $user->questionnaires->first()),[
+        $response = $this->post(route('expert.questionnaires.questions.store', $user->questionnaires->first()),[
             'question' => $question,
             'answers' => $answers,
         ]);
@@ -83,6 +83,6 @@ class QuestionnaireQuestionsMgtTest extends TestCase
         $this->assertCount(1, $user->questionnaires->first()->questions);
         $this->assertCount(4, $user->questionnaires->first()->questions->first()->answers);
 
-        $response->assertRedirect(route('questionnaires.questions.index', $user->questionnaires->first()));
+        $response->assertRedirect(route('expert.questionnaires.questions.index', $user->questionnaires->first()));
     }
 }

@@ -31,11 +31,11 @@ class UserQuestionnaireManagementTest extends TestCase
 
         $this->actingAs(User::factory()->create(['role_id' => $role->id]));
 
-        $response = $this->get(route('admin.questionnaires'));
+        $response = $this->get(route('expert.questionnaires'));
 
         $response->assertOk();
 
-        $response->assertViewIs('admin.questionnaires.index');
+        $response->assertViewIs('expert.questionnaires.index');
 
         $response->assertSeeLivewire('questionnaires');
 
@@ -48,7 +48,7 @@ class UserQuestionnaireManagementTest extends TestCase
         $this->withoutExceptionHandling();
         $this->expectException(AuthenticationException::class);
 
-        $response = $this->get(route('admin.questionnaires'));
+        $response = $this->get(route('expert.questionnaires'));
 
     }
 

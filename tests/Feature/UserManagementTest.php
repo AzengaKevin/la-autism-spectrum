@@ -30,11 +30,11 @@ class UserManagementTest extends TestCase
 
         $this->actingAs(User::factory()->create(['role_id' => $role->id]));
 
-        $response = $this->get(route('users.index'));
+        $response = $this->get(route('admin.users.index'));
 
         $response->assertOk();
 
-        $response->assertViewIs('users.index');
+        $response->assertViewIs('admin.users.index');
 
         $response->assertSeeLivewire('users');
     }

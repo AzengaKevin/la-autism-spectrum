@@ -1,4 +1,4 @@
-<x-custom-form-section action="{{ route('questionnaires.questions.store', $questionnaire) }}">
+<x-custom-form-section action="{{ route('expert.questionnaires.questions.store', $questionnaire) }}">
     <x-slot name="title">
         {{ __('Create A Question with Answers') }}
     </x-slot>

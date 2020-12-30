@@ -33,11 +33,11 @@ class RoleManagementTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->get(route('roles.index'));
+        $response = $this->get(route('admin.roles.index'));
 
         $response->assertOk();
 
-        $response->assertViewIs('roles.index');
+        $response->assertViewIs('admin.roles.index');
 
         $response->assertSeeLivewire('roles');
     }

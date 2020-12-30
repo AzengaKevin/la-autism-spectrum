@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Role;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class RolesController extends Controller
+class UsersController extends Controller
 {
+    public function __construct() {
+
+        $this->authorizeResource(User::class, 'user');
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view('roles.index');
+        return view('admin.users.index');
     }
 
     /**
@@ -41,10 +46,10 @@ class RolesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(User $user)
     {
         //
     }
@@ -52,10 +57,10 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(User $user)
     {
         //
     }
@@ -64,10 +69,10 @@ class RolesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -75,11 +80,12 @@ class RolesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Role  $role
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(User $user)
     {
         //
     }
+    
 }

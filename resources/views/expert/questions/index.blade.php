@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">
                     <div class="flex justify-end py-2">
-                        <x-button-link href="{{ route('questionnaires.questions.create', $questionnaire) }}" class="">Add A Question</x-button-link>
+                        <x-button-link href="{{ route('expert.questionnaires.questions.create', $questionnaire) }}" class="">Add A Question</x-button-link>
                     </div>
                     <livewire:questions :questionnaire="$questionnaire" />
                 </div>
