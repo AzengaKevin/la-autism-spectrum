@@ -4,7 +4,7 @@
 <div class="container mx-auto py-4">
     <h2 class="text-2xl text-center sm:text-left font-bold">{{ $questionnaire->title }}</h2>
 
-    <form action="{{ route('screenings.store', $questionnaire) }}" class="mt-6 divide-y divide-gray-100" method="POST">
+    <form action="{{ route('questionnaires.store', $questionnaire) }}" class="mt-6 divide-y divide-gray-100" method="POST">
         @csrf
         @foreach ($questionnaire->questions as $question)
         <div class="py-4 px-3 sm:px-0">

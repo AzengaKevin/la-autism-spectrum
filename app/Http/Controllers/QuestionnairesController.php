@@ -6,15 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Questionnaire;
 use Illuminate\Support\Facades\Auth;
 
-class ScreeningController extends Controller
+class QuestionnairesController extends Controller
 {
     /**
-     * Show all the questionnaires for screening
+     * Show all the questionnaires for questionnaires
      */
     public function index()
     {
         $questionnaires = Questionnaire::all();
-        return view('screening.index', compact('questionnaires'));
+        return view('questionnaires.index', compact('questionnaires'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ScreeningController extends Controller
         
         $questionnaire->load('questions.answers');
 
-        return view('screening.show', compact('questionnaire'));
+        return view('questionnaires.show', compact('questionnaire'));
         
     }
 
@@ -34,6 +34,7 @@ class ScreeningController extends Controller
      */
     public function store(Request $request, Questionnaire $questionnaire)
     {
+
         $data = $request->validate([
             'responses' => ['bail', 'required', 'array', 'min:1'],
             'responses.*.question_id' => ['bail', 'required', 'numeric'],
@@ -56,7 +57,8 @@ class ScreeningController extends Controller
 
         $screening->responses()->createMany($data['responses']);
 
-        return redirect()->route('screenings.index');
+        return redirect()->route('questionnaires.index');
 
     }
+
 }

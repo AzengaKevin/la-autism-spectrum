@@ -23,7 +23,7 @@ class PublicScreeningTest extends TestCase
             ->hasQuestions(4)
             ->create();
 
-        $response = $this->get(route('screenings.index'));
+        $response = $this->get(route('questionnaires.index'));
 
         $response->assertOk();
     }
@@ -38,7 +38,7 @@ class PublicScreeningTest extends TestCase
             ->hasQuestions(4)
             ->create();
 
-        $response = $this->get(route('screenings.show', Questionnaire::first()));
+        $response = $this->get(route('questionnaires.show', Questionnaire::first()));
 
         $response->assertOk();
     }
@@ -68,18 +68,19 @@ class PublicScreeningTest extends TestCase
             ];
         }
             
-        $response = $this->post(route('screenings.store', $questionnaire), [
+        $response = $this->post(route('questionnaires.store', $questionnaire), [
             'respondent' => [
                 'name' => 'Azenga Kevin', 
                 'email' => 'azenga.kevin7@gmail.com'
             ],
+            
             'responses' => $data
         ]);
 
         $this->assertTrue(Screening::where('questionnaire_id', $questionnaire->id)->exists());
         $this->assertCount(4, Screening::where('questionnaire_id', $questionnaire->id)->first()->responses);
 
-        $response->assertRedirect(route('screenings.index'));
+        $response->assertRedirect(route('questionnaires.index'));
         
     }
 }

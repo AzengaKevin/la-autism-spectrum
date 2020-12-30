@@ -31,7 +31,7 @@
 
                 @can('viewAny', \App\Models\Questionnaire::class)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('questionnaires') }}" :active="request()->routeIs('questionnaires')">
+                    <x-jet-nav-link href="{{ route('admin.questionnaires') }}" :active="request()->routeIs('questionnaires')">
                         {{ __('Questionnaires') }}
                     </x-jet-nav-link>
                 </div>
@@ -159,7 +159,7 @@
             </x-jet-responsive-nav-link>
 
             @can('viewAny', \App\Models\Questionnaire::class)
-            <x-jet-responsive-nav-link href="{{ route('questionnaires') }}" :active="request()->routeIs('questionnaires')">
+            <x-jet-responsive-nav-link href="{{ route('admin.questionnaires') }}" :active="request()->routeIs('questionnaires')">
                 {{ __('Questionnaires') }}
             </x-jet-responsive-nav-link>
             @endcan

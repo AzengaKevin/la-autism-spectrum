@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-                            <a href="{{ route('screenings.index') }}"
+                            <a href="{{ route('questionnaires.index') }}"
                                 class="font-medium text-gray-500 hover:text-gray-900">Questionnaires</a>
 
                             @auth
@@ -67,7 +67,7 @@
                         </div>
                         <div role="menu" aria-orientation="vertical" aria-labelledby="main-menu">
                             <div class="px-2 pt-2 pb-3 space-y-1" role="none">
-                                <a href="{{ route('screenings.index') }}"
+                                <a href="{{ route('questionnaires.index') }}"
                                     class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                                     role="menuitem">Questionnaires</a>
                             </div>
@@ -103,7 +103,7 @@
                         </p>
                         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             <div class="rounded-md shadow">
-                                <a href="{{ route('screenings.index') }}"
+                                <a href="{{ route('questionnaires.index') }}"
                                     class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 md:py-4 md:text-lg md:px-10">
                                     Get started
                                 </a>
