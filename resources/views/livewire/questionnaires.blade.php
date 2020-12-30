@@ -39,7 +39,7 @@
                                 </th>
                             </tr>
                         </thead>
- 
+
                         <tbody class="bg-white divide-y divide-gray-200">
 
                             @if ($questionnaires->count())
@@ -47,8 +47,16 @@
                             <tr>
                                 <td class="px-3 py-2">{{ $index + 1 }}</td>
                                 <td class="px-3 py-2">{{ $questionnaire->title }}</td>
-                                <td class="px-3 py-2"><a class=" text-indigo-500 hover:text-indigo-900"
+                                <td class="px-3 py-2">
+                                    @if ($questionnaire->type === 'questions')
+                                    <a class=" text-indigo-500 hover:text-indigo-900"
                                         href="{{ route('expert.questionnaires.questions.index', $questionnaire) }}">{{ $questionnaire->slug }}</a>
+                                    @endif
+
+                                    @if ($questionnaire->type === 'pictures')
+                                    <a class=" text-indigo-500 hover:text-indigo-900"
+                                        href="{{ route('expert.questionnaires.pictures.index', $questionnaire) }}">{{ $questionnaire->slug }}</a>
+                                    @endif
                                 </td>
                                 <td class="px-3 py-2">{{ $questionnaire->type }}</td>
                                 <td class="px-3 py-2">{{ $questionnaire->age }}</td>
@@ -119,7 +127,7 @@
                     <x-jet-input id="age" class="block mt-1 w-full" type="text" wire:model="age" />
                     <x-jet-input-error for="age" class="mt-2" />
                 </div>
-    
+
                 <div class="mt-4 w-full sm:w-1/2">
                     <x-jet-label for="type" value="{{ __('Questionnaire Type') }}" />
                     <select id="type" autocomplete="type" wire:model="type"

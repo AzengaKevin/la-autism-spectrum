@@ -81,7 +81,7 @@ class Questionnaires extends Component
      */
     public function readQuestionnaires()
     {
-        return Questionnaire::all();
+        return Auth::user()->questionnaires;
     }
 
     /**
