@@ -66,12 +66,10 @@ Route::group([
 ], function(){
     Route::get('questionnaires', fn() => view('expert.questionnaires.index'))->name('questionnaires')
         ->middleware('can:viewAny,App\Models\Questionnaire');
-    Route::get('/questionnaires/{questionnaire:slug}/questions', 'QuestionController@index')
-        ->name('questionnaires.questions.index');
-    Route::get('/questionnaires/{questionnaire:slug}/questions/create', 'QuestionController@create')
-        ->name('questionnaires.questions.create');
-    Route::post('/questionnaires/{questionnaire:slug}/questions', 'QuestionController@store')
-        ->name('questionnaires.questions.store');        
+    Route::resource('questionnaires.questions', 'QuestionnaireQuestionController',
+        ['only' => ['index', 'create', 'store']]);
+    Route::resource('questionnaires.pictures', 'QuestionnairePictureController',
+        ['only' => ['index', 'create', 'store']]);
 });
 
 
