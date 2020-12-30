@@ -46,21 +46,6 @@
             </div>
         </fieldset>
 
-        <div class="py-4 col-span-6" x-data="{photoName: null}">
-            <input id="file" name="file" type="file" class="hidden" wire:model="photo" x-ref="photo" />
-            <x-jet-label class="font-semibold" for="fil" value="{{ __('Photo') }}" />
-            <div class="mt-2 flex items-center">
-                <div class="border border-gray-200 rounded-sm">
-                    <img class="w-32 h-auto" src="{{ is_null($photo) ? url('/img/placeholder.png') : $photo->temporaryUrl() }}" alt="Placeholder Image">
-                </div>
-                <button type="button"
-                    class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    x-on:click.prevent="$refs.photo.click()">
-                    Change
-                </button>
-            </div>
-        </div>
-
     </x-slot>
 
     <x-slot name="actions">

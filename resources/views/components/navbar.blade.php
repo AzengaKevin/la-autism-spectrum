@@ -36,7 +36,7 @@
 
                 @guest
                 <a href="{{ route('login') }}"
-                    class="bg-white p-1 rounded-full text-teal-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-white">
+                    class="p-1 rounded-full text-teal-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-white">
                     <span class="sr-only">Login</span>
                     <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                         <defs />

@@ -29,28 +29,14 @@ class QuestionController extends Controller
         $data = $request->validate([
             'question.question' => ['bail', 'required', 'string', 'max:255'],
             'answers' => ['bail', 'nullable', 'array', 'between:2,4'],
-            'answers.*.answer' => ['bail', 'required', 'max:255'],
-            'file' => ['bail','nullable', 'image', 'max:2048'],
+            'answers.*.answer' => ['bail', 'required', 'max:255']
         ]);
         
         //Persist the question
         $question = $questionnaire->questions()->create($data['question']);
 
-        if (isset($data['answers'])) {
-            //Persist the Answers
-            $question->answers()->createMany($data['answers']);
-        }else{
-
-            $path = $data['file']->store('images/questionnaires', 'public');
-
-            info('File Path ' . $path);
-
-            //Save the image
-            $question->file()->create([
-                'path' => $path
-            ]);
-
-        }
+        //Persist the Answers
+        $question->answers()->createMany($data['answers']);
 
         return redirect()->route('questionnaires.questions.index', $questionnaire);
     }
