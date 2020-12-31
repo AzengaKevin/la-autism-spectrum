@@ -70,6 +70,8 @@ Route::group([
         ['only' => ['index', 'create', 'store']]);
     Route::resource('questionnaires.pictures', 'QuestionnairePictureController',
         ['only' => ['index', 'create', 'store']]);
+    Route::resource('questionnaires.videos', 'QuestionnaireVideoController',
+        ['only' => ['index', 'create', 'store', 'edit', 'update', 'delete']]);
 });
 
 
