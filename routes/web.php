@@ -25,9 +25,19 @@ Route::group([
 });
 
 Route::resource('questionnaires', 'QuestionnairesController')
-    ->only('index', 'show');
+    ->only('index');
+    
 Route::post('questionnaires/{questionnaire}', 'QuestionnairesController@store')
     ->name('questionnaires.store');
+
+Route::resource('questionnaires.questions', 'QuestionnaireQuestionController')
+    ->only('index');
+Route::resource('questionnaires.videos', 'QuestionnaireVideoController')
+    ->only('index');
+Route::resource('questionnaires.pictures', 'QuestionnairePictureController')
+    ->only('index');
+Route::resource('questionnaires.screenings', 'QuestionnaireScreeningController')
+    ->only('store');
 
 /*
 |--------------------------------------------------------------------------
