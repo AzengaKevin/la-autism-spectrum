@@ -9,7 +9,7 @@ class Screening extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'name', 'email', 'questionnaire_id'];
+    protected $fillable = ['user_id', 'name', 'email', 'path', 'questionnaire_id'];
 
     /**
      * Screening Response Relationship
@@ -17,5 +17,10 @@ class Screening extends Model
     public function responses()
     {
         return $this->hasMany(ScreeningResponse::class);
+    }
+
+    public function screeningVideos()
+    {
+        return $this->hasMany(ScreeningVideo::class);
     }
 }
