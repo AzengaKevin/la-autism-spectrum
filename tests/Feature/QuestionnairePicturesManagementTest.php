@@ -70,7 +70,7 @@ class QuestionnairePicturesManagementTest extends TestCase
 
         //Assert
 
-        $this->assertCount(1, $questionnaire->pictures);
+        $this->assertCount(1, $questionnaire->fresh()->pictures);
 
         Storage::disk('public')->assertExists($questionnaire->pictures->first()->path);
         Storage::disk('public')->assertExists($questionnaire->pictures->first()->thmbnail);
