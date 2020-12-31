@@ -82,6 +82,8 @@ Route::group([
         ['only' => ['index', 'create', 'store']]);
     Route::resource('questionnaires.videos', 'QuestionnaireVideoController',
         ['only' => ['index', 'create', 'store', 'edit', 'update', 'delete']]);
+
+    Route::resource('screenings', 'ScreeningController');
 });
 
 

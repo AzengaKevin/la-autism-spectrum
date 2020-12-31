@@ -73,7 +73,7 @@ class User extends Authenticatable
      */
     public function screenings()
     {
-        return $this->hasMany(Screening::class);
+        return $this->hasManyThrough(Screening::class, Questionnaire::class);
     }
 
     /**

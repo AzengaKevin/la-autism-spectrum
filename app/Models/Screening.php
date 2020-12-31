@@ -19,6 +19,14 @@ class Screening extends Model
         return $this->hasMany(ScreeningResponse::class);
     }
 
+    /**
+     * Screening Questionnaire Relationship M : 1
+     */
+    public function questionnaire()
+    {
+        return $this->belongsTo(Questionnaire::class);
+    }
+
     public function screeningVideos()
     {
         return $this->hasMany(ScreeningVideo::class);
