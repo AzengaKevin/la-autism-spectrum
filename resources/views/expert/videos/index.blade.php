@@ -18,10 +18,12 @@
                         @endif
                     </div>
                     
+                    @if (!is_null($questionnaire->video))
                     <video controls>
                         <source src="{{ $questionnaire->video->pathUrl() }}" type="">
                         {{ $questionnaire->video->description }}
                     </video>
+                    @endif
                 </div>
             </div>
         </div>
