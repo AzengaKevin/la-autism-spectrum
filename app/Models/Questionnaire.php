@@ -46,6 +46,14 @@ class Questionnaire extends Model
     }
 
     /**
+     * Questionnaire Video Relationship 1 : 1
+     */
+    public function video()
+    {
+        return $this->hasOne(Video::class);
+    }
+
+    /**
      * Data function containing the type of questionnaires
      * 
      * @return array of the types of questionnaires

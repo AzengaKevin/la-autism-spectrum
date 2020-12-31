@@ -57,6 +57,11 @@
                                     <a class=" text-indigo-500 hover:text-indigo-900"
                                         href="{{ route('expert.questionnaires.pictures.index', $questionnaire) }}">{{ $questionnaire->slug }}</a>
                                     @endif
+
+                                    @if ($questionnaire->type === 'video')
+                                    <a class=" text-indigo-500 hover:text-indigo-900"
+                                        href="{{ route('expert.questionnaires.videos.index', $questionnaire) }}">{{ $questionnaire->slug }}</a>
+                                    @endif
                                 </td>
                                 <td class="px-3 py-2">{{ $questionnaire->type }}</td>
                                 <td class="px-3 py-2">{{ $questionnaire->age }}</td>
