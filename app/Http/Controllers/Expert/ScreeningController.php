@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Expert;
 
-use App\Http\Controllers\Controller;
 use App\Models\Screening;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class ScreeningController extends Controller
 {
@@ -27,27 +28,6 @@ class ScreeningController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Screening  $screening
@@ -64,9 +44,9 @@ class ScreeningController extends Controller
      * @param  \App\Models\Screening  $screening
      * @return \Illuminate\Http\Response
      */
-    public function edit(Screening $screening)
+    public function opinionShow(Screening $screening)
     {
-        //
+        return view('expert.screenings.opinion', compact('screening'));
     }
 
     /**
@@ -76,9 +56,18 @@ class ScreeningController extends Controller
      * @param  \App\Models\Screening  $screening
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Screening $screening)
+    public function opinionSend(Request $request, Screening $screening)
     {
-        //
+        $data = $request->validate([
+            'content' => ['required', 'string']
+        ]);
+
+        Mail::to($screening->email)
+            ->send(new \App\Mail\ScreeningResponse($data['content'], $screening));
+
+        $request->session()->flash('success_message', 'Responce sent successfully');
+
+        return redirect()->route('expert.screenings.index');
     }
 
     /**
@@ -89,6 +78,8 @@ class ScreeningController extends Controller
      */
     public function destroy(Screening $screening)
     {
-        //
+        $screening->delete();
+
+        return redirect()->route('expert.screenings.index');
     }
 }

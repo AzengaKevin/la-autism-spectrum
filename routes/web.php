@@ -83,7 +83,16 @@ Route::group([
     Route::resource('questionnaires.videos', 'QuestionnaireVideoController',
         ['only' => ['index', 'create', 'store', 'edit', 'update', 'delete']]);
 
-    Route::resource('screenings', 'ScreeningController');
+    Route::resource('screenings', 'ScreeningController')
+        ->only('index', 'show', 'destroy');
+
+    Route::get('screenings/{screening}/opinion', 'ScreeningController@opinionShow')
+        ->name('screenings.opinion.show');
+
+    Route::post('screenings/{screening}/opinion', 'ScreeningController@opinionSend')
+        ->name('screenings.opinion.send');
 });
+
+//Route::get('mail', fn() => new \App\Mail\ScreeningResponse('Something Cool', \App\Models\Screening::first()));
 
 

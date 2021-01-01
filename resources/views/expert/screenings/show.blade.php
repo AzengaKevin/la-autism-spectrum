@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">
                     <div class="flex justify-end py-2">
-                        <x-button-link href="#" class="">Send Response</x-button-link>
+                        <x-button-link href="{{ route('expert.screenings.opinion.show', $screening) }}" class="">Send Response</x-button-link>
                     </div>
                     @if ($screening->questionnaire->type === 'questions')
                     <x-screening.questions :screening="$screening" />
