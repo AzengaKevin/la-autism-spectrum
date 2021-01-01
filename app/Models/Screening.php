@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Screening extends Model
 {
@@ -30,5 +31,10 @@ class Screening extends Model
     public function screeningVideos()
     {
         return $this->hasMany(ScreeningVideo::class);
+    }
+
+    public function pathUrl() : string
+    {
+        return Storage::disk('public')->url($this->path);
     }
 }

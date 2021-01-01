@@ -38,4 +38,5 @@ class ScreeningsManagementTest extends TestCase
 
         $response->assertViewHas('screenings');
     }
+
 }

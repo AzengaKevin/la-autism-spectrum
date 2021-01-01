@@ -55,7 +55,7 @@ class ScreeningController extends Controller
      */
     public function show(Screening $screening)
     {
-        //
+        return view('expert.screenings.show', compact('screening'));
     }
 
     /**
