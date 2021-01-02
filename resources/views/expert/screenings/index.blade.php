@@ -11,7 +11,9 @@
 
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <x-feedback />
+                    <div class="py-2">
+                        <x-feedback />
+                    </div>
 
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
